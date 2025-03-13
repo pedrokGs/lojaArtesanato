@@ -1,0 +1,8 @@
+.container-imagem{
+    height: 50vh;
+    width: 30vw;
+    background-color: antiquewhite;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 15px;
+}
