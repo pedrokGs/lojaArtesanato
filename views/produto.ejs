@@ -11,6 +11,33 @@
 <body>
     <%- include ("partials/navbar.ejs") %>
 
+        <div class="container-produto">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="row">
+                        <h1 class="col-9">
+                            <%= produto.nome %>
+                        </h1>
+                        <h3 class="preco col-3">
+                            R$<%= produto.preco %>
+                        </h3>
+                    </div>
+                    <p class="">
+                        <%= produto.descricao %>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="container-imagem">
+                        <img src="<%= produto.imagemUrl %>" alt="" height="100%" width="100%">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-success">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </div>
 </body>
 <%- include ("partials/footer.ejs") %>
 

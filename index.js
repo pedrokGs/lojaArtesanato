@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const connection = require("./database/database");
 const Produto = require("./database/Produto");
+const { where } = require("sequelize");
 
 
 //Database
@@ -42,38 +43,43 @@ app.post("/cadastrarProduto", (req, res) => {
     var nome = req.body.nome;
     var descricao = req.body.descricao;
     var preco = req.body.preco;
-    var imagem = req.body.imagem;
+    var imagemUrl = req.body.imagemUrl;
 
     Produto.create({
         nome: nome,
         descricao: descricao,
         preco: preco,
-        imagem: imagem
+        imagemUrl: imagemUrl
     }).then(() => {
         res.redirect("/");
     })
 })
 
-app.get("/pergunta/:id", (req, res) => {
-    var id = req.params.id;
-    Pergunta.findOne({
-        where: { id: id }
-    }).then(pergunta => {
-        if (pergunta != undefined) { //pergunta 
-            Resposta.findAll({
-                where: { perguntaId: pergunta.id }
-            }).then(respostas => {
+app.get("/catalogo", (req, res) => {
+    Produto.findAll({
+        raw: true, order: [
+            ["id", 'DESC'] //ASC = Crescente || DESC = decrescente 
+        ]
+    }).then(produtos => {
+        res.render("catalogo", { produtos: produtos });
+    });
+});
 
-                res.render("pergunta", {
-                    pergunta: pergunta,
-                    respostas: respostas,
-                })
+app.get("/catalogo/:id", (req, res) => {
+    var id = req.params.id;
+    Produto.findOne({
+        where: { id: id }
+    }).then(produto => {
+        if (produto != undefined) { //produto 
+            res.render("produto", {
+                produto: produto,
             })
         } else {//Não 
             res.redirect("/")
         }
     })
 })
+
 /*
 app.post("/salvarResposta", (req, res) => {
     var corpo = req.body.corpo;

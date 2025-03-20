@@ -14,8 +14,8 @@ const Produto = connection.define('produtos',{
         type: Sequelize.DECIMAL,
         allowNull: false
     },
-    imagem:{
-        type: Sequelize.BLOB,
+    imagemUrl:{
+        type: Sequelize.STRING,
         allowNull: false
     }
 })

@@ -6,38 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Produtos</title>
     <%- include ("partials/header.ejs") %>
-
-        <style>
-            img {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                width: 100%;
-                height: 100%;
-            }
-        </style>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .imagem {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
     <%- include ("partials/navbar.ejs") %>
-        <div class="container" style="padding: 5%;">
-            <div class="row">
+    <div class="container mt-5">
+        <div class="row">
                 <div class="container-fluid col-6 " style="margin-top: 2%;">
                     <form method="POST" action="/cadastrarProduto">
                         <h3>Cadastrar Produto</h3>
                         <br><input type="text" name="nome" placeholder="Digite o nome" class="form-control">
                         <br><textarea placeholder="Digite a descrição" class="form-control" name="descricao"></textarea>
                         <br><input type="number" name="preco" placeholder="Digite o preço" class="form-control">
-                        <br><input type="file" class="form-control" name="imagem" placeholder="Envie uma imagem"
-                            onchange="previewImage()">
+                        <br><input type="text" class="form-control" name="imagemUrl" placeholder="Cole o URL da imagem aqui"
+                            onchange="previewImageUrl()">
                         <br><button type="submit" class="btn btn-success">Cadastrar</button>
                     </form>
                 </div>
 
                 <div class="imagem-showcase col-4 container-fluid">
                     <div class="container-imagem"
-                        style="background-color: rgb(226, 226, 226); margin: auto;">
-                        <img id="preview" alt="Sua imagem aqui!" src="">
+                        style="margin: auto;">
+                        <img id="preview" class="imagem" alt="Sua imagem aqui!" src="" height="100%" width="100%">
                     </div>
                 </div>
             </div>
@@ -45,25 +47,18 @@
 </body>
 <%- include ("partials/footer.ejs") %>
 
-    <script>
-        function previewImage() {
-            let preview = document.querySelector("img");
-            var file = document.querySelector('input[type=file]').files[0];
-            console.log("Carregando preview!");
+<script>
+    function previewImageUrl() {
+        let preview = document.querySelector("#preview");
+        let imageUrl = document.querySelector('input[name=imagemUrl]').value;
+        console.log("Carregando preview da URL!");
 
-            var reader = new FileReader();
-
-            reader.onloadend = function () {
-                preview.src = reader.result;
-            }
-
-            if (file) {
-                reader.readAsDataURL(file);
-            } else {
-                preview.src = "";
-            }
+        if (imageUrl) {
+            preview.src = imageUrl;
+        } else {
+            preview.src = "";
         }
-
-    </script>
+    }
+</script>
 
 </html>
