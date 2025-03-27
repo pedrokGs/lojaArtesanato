@@ -17,6 +17,10 @@
             height: auto;
             overflow: hidden;
         }
+
+        body{
+            background-color: #E9D8B7;
+        }
     </style>
 </head>
 
@@ -39,7 +43,7 @@
                 <div class="imagem-showcase col-4 container-fluid">
                     <div class="container-imagem"
                         style="margin: auto;">
-                        <img id="preview" class="imagem" alt="Sua imagem aqui!" src="" height="100%" width="100%">
+                        <img id="preview" class="imagem" alt="Ocorreu um erro ao carregar a imagem!" src="" height="100%" width="100%" hidden>
                     </div>
                 </div>
             </div>
@@ -55,6 +59,7 @@
 
         if (imageUrl) {
             preview.src = imageUrl;
+            preview.hidden = false;
         } else {
             preview.src = "";
         }

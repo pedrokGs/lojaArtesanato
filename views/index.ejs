@@ -5,11 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <%- include ("partials/header.ejs") %>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .container-item {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .container-item:hover {
+            transform: scale(1.05);
+        }
+
+        .item-info h3 {
+            margin: 10px 0 0;
+            font-size: 1.2em;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .col-4 {
+            flex: 1 1 calc(33.333% - 20px);
+            box-sizing: border-box;
+        }
+
+        img {
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
     <%- include ("partials/navbar.ejs") %>
-
     
+      <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/img/carousel1.png" class="d-block w-100" alt="..." height="500px">
+          </div>
+          <div class="carousel-item">
+            <img src="/img/carousel2.png" class="d-block w-100" alt="..." height="500px">
+          </div>
+          <div class="carousel-item">
+            <img src="/img/carousel3.png" class="d-block w-100" alt="..." height="500px">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+
+
+      <div class="container mt-3">
+        <div class="row">
+            <div class="col-12">
+                <h1>Produtos mais recentes</h1>
+            </div>
+        </div>
+        <div class="row">
+            <% produtos.slice(Math.max(produtos.length - 3, 0)).forEach(produto => { %>
+                <div class="col-4">
+                    <a href="/catalogo/<%= produto.id %>">
+                        <div class="container-item">
+                            <div class="container">
+                                <img src="<%= produto.imagemUrl %>" alt="" height="250px" width="100%">
+                                <br>
+                                <div class="item-info" style="margin-top: 10%;">
+                                    <h3>
+                                        <%= produto.nome %> | R$<span style="color: green;"><%= produto.preco %></span>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <% }); %>
+        </div>
+    </div>
 </body>
 <%- include ("partials/footer.ejs") %>
 </html>
