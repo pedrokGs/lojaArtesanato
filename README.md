@@ -1,4 +1,4 @@
-<h3>Grupo:Pedro Gonçalves, Kauan Sabino, Lucas Pains<h3>  
+<h3>Grupo:Pedro Gonçalves, Kauan Sabino, Lucas Pains, Thauany Zambon<h3>  
 
 <h1>Loja de Artesanato<h1>  
   
